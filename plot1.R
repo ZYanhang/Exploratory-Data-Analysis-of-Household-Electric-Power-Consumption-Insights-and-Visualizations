@@ -1,0 +1,8 @@
+data<-read.table("C:/Users/ayoub/Downloads/exdata_data_household_power_consumption/household_power_consumption.txt", sep = ";", header = TRUE)
+data<- data %>% mutate(Date= as.Date(Date, format="%d/%m/%Y"))
+data <- data %>% mutate(DateTime = strptime(paste(Date, Time), format = "%Y-%m-%d %H:%M:%S"))
+data<- data %>% filter(Date=="2007-02-01" | Date=="2007-02-02")
+data<- data %>% mutate(Global_active_power= as.numeric(Global_active_power))
+hist(data$Global_active_power, col = "Red", main = "Global active power", xlab ="Global active power (kilowatts)")
+dev.copy(png, "plot1.png", width=408, height=408)
+dev.off()
